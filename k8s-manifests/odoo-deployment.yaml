@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo
+  namespace: icgroup
+  labels:
+    env: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+  template:
+    metadata:
+      labels:
+        app: odoo
+        env: prod
+    spec:
+      containers:
+      - name: odoo
+        image: odoo:13
+        ports:
+        - containerPort: 8069
+        env:
+        - name: HOST
+          value: odoo-db
+        - name: USER
+          value: odoo
+        - name: PASSWORD
+          value: odoo

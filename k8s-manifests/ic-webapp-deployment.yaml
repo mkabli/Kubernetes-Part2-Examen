@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ic-webapp
+  namespace: icgroup
+  labels:
+    env: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ic-webapp
+  template:
+    metadata:
+      labels:
+        app: ic-webapp
+        env: prod
+    spec:
+      containers:
+      - name: ic-webapp
+        image: mkabli/ic-webapp:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
